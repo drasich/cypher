@@ -4,7 +4,7 @@
 #define ERR(str,...) printf("ERROR : %s\n", str, ## __VA_ARGS__)
 
 Shader*
-shader_simple_init_string(const char* vert, const char* frag, const char* att)
+shader_init_string(const char* vert, const char* frag, const char* att)
 {
   Shader* s = calloc(1, sizeof *s);
   //TODO factorize this by creating a function that get the shader id
