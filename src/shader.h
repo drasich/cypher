@@ -3,6 +3,9 @@
 #include "gl.h"
 #include "buffer.h"
 
+typedef void (*rust_callback)(int32_t);
+rust_callback cb;
+
 typedef struct _Shader Shader;
 
 struct _Shader
@@ -21,9 +24,10 @@ struct _ShaderRequest
   const char* vert;
   const char* frag;
   const char* att;
+  rust_callback cb;
 };
 
-int shader_request_add(const char* vert, const char* frag, const char* att);
+int shader_request_add(const char* vert, const char* frag, const char* att, rust_callback cb);
 Eina_List* shader_request_get();
 void shader_request_clean();
 

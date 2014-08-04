@@ -75,13 +75,14 @@ static Eina_List* _shader_requests = NULL;
 static pthread_mutex_t lock;
 
 int
-shader_request_add(const char* vert, const char* frag, const char* att)
+shader_request_add(const char* vert, const char* frag, const char* att, rust_callback cb)
 {
   _id++;
   ShaderRequest* sr = calloc(1, sizeof *sr);
   sr->vert = strdup(vert);
   sr->frag = strdup(frag);
   sr->att = strdup(att);
+  sr->cb = cb;
   //printf("added request %p, \n %s\n %s \n", sr, sr->vert, sr->frag);
   pthread_mutex_lock(&lock);
   _shader_requests = eina_list_append(_shader_requests, sr);
@@ -133,4 +134,5 @@ shader_draw(Shader* ss, Buffer* buf)
   glDrawArrays(GL_TRIANGLES, 0, 3);
 
 }
+
 
