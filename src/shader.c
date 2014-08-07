@@ -75,10 +75,11 @@ static Eina_List* _shader_requests = NULL;
 static pthread_mutex_t lock;
 
 int
-shader_request_add(const char* vert, const char* frag, const char* att, rust_callback cb)
+shader_request_add(void* material, const char* vert, const char* frag, const char* att, rust_callback cb)
 {
   _id++;
   ShaderRequest* sr = calloc(1, sizeof *sr);
+  sr->material = material;
   sr->vert = strdup(vert);
   sr->frag = strdup(frag);
   sr->att = strdup(att);
