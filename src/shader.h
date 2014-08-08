@@ -38,4 +38,15 @@ void shader_request_init();
 void shader_use(Shader* s);
 void shader_draw(Shader* s, Buffer* buf);
 
+
+typedef struct _DrawRequest DrawRequest;
+struct _DrawRequest
+{
+  Shader* shader;
+  Buffer* buffer;
+};
+
+Eina_List* draw_equest_get();
+
+
 #endif

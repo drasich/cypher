@@ -24,7 +24,8 @@ static Eina_List* _buffer_requests = NULL;
 static pthread_mutex_t lock;
 
 int
-buffer_request_add(const void* vertex, int count)
+//buffer_request_add(const void* vertex, int count)
+buffer_request_add(void* mesh, const void* vertex, int count, rust_mesh_callback cb)
 {
   BufferRequest* br = calloc(1, sizeof *br);
   br->vertex = vertex;
