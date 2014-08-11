@@ -25,11 +25,13 @@ static pthread_mutex_t lock;
 
 int
 //buffer_request_add(const void* vertex, int count)
-buffer_request_add(void* mesh, const void* vertex, int count, rust_mesh_callback cb)
+buffer_request_add(void* mesh, const void* vertex, int count, rust_buffer_callback cb)
 {
   BufferRequest* br = calloc(1, sizeof *br);
   br->vertex = vertex;
   br->count = count;
+  br->mesh = mesh;
+  br->cb = cb;
 
   pthread_mutex_lock(&lock);
   _buffer_requests = eina_list_append(_buffer_requests, br);
