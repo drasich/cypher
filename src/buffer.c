@@ -36,6 +36,8 @@ buffer_request_add(void* mesh, const void* vertex, int count, rust_buffer_callba
   pthread_mutex_lock(&lock);
   _buffer_requests = eina_list_append(_buffer_requests, br);
   pthread_mutex_unlock(&lock);
+
+  return 44;
 }
 
 Eina_List* buffer_request_get()
@@ -47,3 +49,4 @@ Eina_List* buffer_request_get()
   pthread_mutex_unlock(&lock);
   return clone;
 }
+
