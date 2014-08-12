@@ -11,10 +11,11 @@ struct _Drawable
   Buffer* buffer;
 };
 
-typedef const void* (*rust_drawdata_callback)();
+typedef const void* (*rust_drawdata_callback)(void* data);
 
-void draw_data_set(rust_drawdata_callback cb);
+void draw_data_set(rust_drawdata_callback cb, void* data);
 
 rust_drawdata_callback draw_data_get();
+const void* getZADATA();
 
 #endif
