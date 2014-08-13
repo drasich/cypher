@@ -18,4 +18,13 @@ void draw_data_set(rust_drawdata_callback cb, void* data);
 rust_drawdata_callback draw_data_get();
 const void* getZADATA();
 
+typedef struct _List CypherList;
+
+struct _List
+{
+  void *data;
+  CypherList* next;
+};
+
+
 #endif
