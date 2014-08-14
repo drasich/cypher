@@ -64,13 +64,16 @@ void cypher_draw(int w, int h)
   _shader_request_handle();
   _buffer_request_handle();
 
-  const Drawable* dr = getZADATA();
-  if (dr == NULL) return;
-  else
-   {
-    shader_draw(dr->shader, dr->buffer);
-    return;
-   }
+  if (!draw_callback_call())  {
+    const Drawable* dr = getZADATA();
+    if (dr == NULL) return;
+    else
+     {
+      shader_draw(dr->shader, dr->buffer);
+      return;
+     }
+  }
+
 
   glFinish();
 

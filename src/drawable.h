@@ -2,6 +2,7 @@
 #define __drawable__
 #include "buffer.h"
 #include "shader.h"
+#include "stdbool.h"
 
 typedef struct _Drawable Drawable;
 
@@ -25,6 +26,11 @@ struct _List
   void *data;
   CypherList* next;
 };
+
+typedef void (*rust_draw_callback)(void* data);
+
+void draw_callback_set(rust_draw_callback cb, void* data);
+bool draw_callback_call();
 
 
 #endif
