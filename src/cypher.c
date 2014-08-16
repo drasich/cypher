@@ -62,7 +62,7 @@ void cypher_draw(int w, int h)
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   _shader_request_handle();
-  _buffer_request_handle();
+  //_buffer_request_handle();
 
   if (!draw_callback_call())  {
     const Drawable* dr = getZADATA();
