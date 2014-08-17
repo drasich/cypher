@@ -36,14 +36,14 @@ void shader_request_clean();
 void shader_request_init();
 
 void shader_use(Shader* s);
-void shader_draw(Shader* s, Buffer* buf);
+void shader_draw(Shader* s, CglBuffer* buf);
 
 
 typedef struct _DrawRequest DrawRequest;
 struct _DrawRequest
 {
   Shader* shader;
-  Buffer* buffer;
+  CglBuffer* buffer;
 };
 
 Eina_List* draw_equest_get();

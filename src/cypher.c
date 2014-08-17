@@ -30,6 +30,7 @@ _shader_request_handle()
   eina_list_free(shader_requests);
 }
 
+/*
 static void
 _buffer_request_handle()
 {
@@ -49,6 +50,7 @@ _buffer_request_handle()
   eina_list_free(buffer_requests);
 
 }
+*/
 
 
 void cypher_draw(int w, int h)

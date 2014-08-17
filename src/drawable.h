@@ -9,7 +9,7 @@ typedef struct _Drawable Drawable;
 struct _Drawable
 {
   Shader* shader;
-  Buffer* buffer;
+  CglBuffer* buffer;
 };
 
 typedef const void* (*rust_drawdata_callback)(void* data);

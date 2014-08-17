@@ -119,7 +119,7 @@ shader_use(Shader* ss)
 
 
 void
-shader_draw(Shader* ss, Buffer* buf)
+shader_draw(Shader* ss, CglBuffer* buf)
 {
   glBindBuffer(buf->target, buf->id);
   glEnableVertexAttribArray(ss->att_location);
