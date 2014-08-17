@@ -2,7 +2,7 @@
 #include <pthread.h>
 
 Buffer*
-buffer_init(const void* vertex, int count)
+buffer_init(const void* vertex, uint count)
 {
   Buffer* b = calloc(1, sizeof *b);
   b->target = GL_ARRAY_BUFFER;

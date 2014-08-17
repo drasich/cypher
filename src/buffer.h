@@ -21,7 +21,7 @@ struct _BufferRequest
   rust_buffer_callback cb;
 };
 
-Buffer* buffer_init(const void* vertex, int count);
+Buffer* buffer_init(const void* vertex, uint count);
 
 int buffer_request_add(void* mesh, const void* vertex, int count, rust_buffer_callback cb);
 Eina_List* buffer_request_get();
