@@ -2,10 +2,10 @@
 
 #define ERR(str,...) printf("ERROR : %s\n", str, ## __VA_ARGS__)
 
-Shader*
-shader_init_string(const char* vert, const char* frag, const char* att)
+CglShader*
+cgl_shader_init_string(const char* vert, const char* frag, const char* att)
 {
-  Shader* s = calloc(1, sizeof *s);
+  CglShader* s = calloc(1, sizeof *s);
   //TODO factorize this by creating a function that get the shader id
   s->vert_shader = glCreateShader(GL_VERTEX_SHADER);
   if (s->vert_shader == 0) 
@@ -70,13 +70,13 @@ shader_init_string(const char* vert, const char* frag, const char* att)
 }
 
 void
-shader_use(Shader* ss)
+cgl_shader_use(CglShader* s)
 {
-  glUseProgram(ss->program);
+  glUseProgram(s->program);
 }
 
 void
-shader_draw(Shader* ss, CglBuffer* buf)
+cgl_shader_draw(CglShader* ss, CglBuffer* buf)
 {
   glBindBuffer(buf->target, buf->id);
   glEnableVertexAttribArray(ss->att_location);

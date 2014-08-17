@@ -3,9 +3,9 @@
 #include "gl.h"
 #include "buffer.h"
 
-typedef struct _Shader Shader;
+typedef struct _CglShader CglShader;
 
-struct _Shader
+struct _CglShader
 {
   GLuint vert_shader;
   GLuint frag_shader;
@@ -13,9 +13,9 @@ struct _Shader
   GLuint att_location;
 };
 
-Shader* shader_init_string(const char* vert, const char* frag, const char* att);
+CglShader* shader_init_string(const char* vert, const char* frag, const char* att);
 
-void shader_use(Shader* s);
-void shader_draw(Shader* s, CglBuffer* buf);
+void shader_use(CglShader* s);
+void shader_draw(CglShader* s, CglBuffer* buf);
 
 #endif
