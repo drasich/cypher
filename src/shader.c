@@ -1,5 +1,4 @@
 #include "shader.h"
-#include <pthread.h>
 
 #define ERR(str,...) printf("ERROR : %s\n", str, ## __VA_ARGS__)
 
@@ -70,53 +69,11 @@ shader_init_string(const char* vert, const char* frag, const char* att)
   return s;
 }
 
-static int _id = 0;
-static Eina_List* _shader_requests = NULL;
-static pthread_mutex_t lock;
-
-int
-shader_request_add(void* material, const char* vert, const char* frag, const char* att, rust_callback cb)
-{
-  _id++;
-  ShaderRequest* sr = calloc(1, sizeof *sr);
-  sr->material = material;
-  sr->vert = strdup(vert);
-  sr->frag = strdup(frag);
-  sr->att = strdup(att);
-  sr->cb = cb;
-  //printf("added request %p, \n %s\n %s \n", sr, sr->vert, sr->frag);
-  pthread_mutex_lock(&lock);
-  _shader_requests = eina_list_append(_shader_requests, sr);
-  pthread_mutex_unlock(&lock);
-}
-
-Eina_List* shader_request_get()
-{
-  pthread_mutex_lock(&lock);
-  Eina_List* clone = eina_list_clone(_shader_requests);
-  eina_list_free(_shader_requests);
-  _shader_requests = NULL;
-  pthread_mutex_unlock(&lock);
-  return clone;
-}
-
-void shader_request_clean()
-{
-  eina_list_free(_shader_requests);
-  _shader_requests = NULL;
-}
-
-void shader_request_init()
-{
-  pthread_mutex_init(&lock, NULL);
-}
-
 void
 shader_use(Shader* ss)
 {
   glUseProgram(ss->program);
 }
-
 
 void
 shader_draw(Shader* ss, CglBuffer* buf)
@@ -133,7 +90,6 @@ shader_draw(Shader* ss, CglBuffer* buf)
         0);
 
   glDrawArrays(GL_TRIANGLES, 0, 3);
-
 }
 
 
