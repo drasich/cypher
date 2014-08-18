@@ -3,6 +3,21 @@
 #include "gl.h"
 #include "buffer.h"
 
+typedef struct _CglShaderAttribute CglShaderAttribute;
+
+struct _CglShaderAttribute
+{
+  GLuint location;
+  GLint size;
+  GLenum type;
+};
+
+typedef struct _CglShaderUniform CglShaderUniform;
+struct _CglShaderUniform{
+  GLuint location;
+  //UniformType type;
+};
+
 typedef struct _CglShader CglShader;
 
 struct _CglShader

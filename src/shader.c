@@ -76,13 +76,13 @@ cgl_shader_use(CglShader* s)
 }
 
 void
-cgl_shader_draw(CglShader* ss, CglBuffer* buf)
+cgl_shader_attribute_send(CglShader* s, CglBuffer* buf)
 {
   glBindBuffer(buf->target, buf->id);
-  glEnableVertexAttribArray(ss->att_location);
+  glEnableVertexAttribArray(s->att_location);
 
   glVertexAttribPointer(
-        ss->att_location,
+        s->att_location,
         2,
         GL_FLOAT, //att->type,
         GL_FALSE,
@@ -91,5 +91,24 @@ cgl_shader_draw(CglShader* ss, CglBuffer* buf)
 
   glDrawArrays(GL_TRIANGLES, 0, 3);
 }
+
+void
+cgl_shader_draw(CglShader* s, CglBuffer* buf)
+{
+  glBindBuffer(buf->target, buf->id);
+  glEnableVertexAttribArray(s->att_location);
+
+  glVertexAttribPointer(
+        s->att_location,
+        2,
+        GL_FLOAT, //att->type,
+        GL_FALSE,
+        0,//buf->stride,
+        0);
+
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+
 
 
