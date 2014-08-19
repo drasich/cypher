@@ -64,7 +64,7 @@ cgl_shader_init_string(const char* vert, const char* frag)
 }
 
 CglShaderAttribute*
-cgl_shader_attribute_get(CglShader *s, const char* name, uint size)
+cgl_shader_attribute_new(CglShader *s, const char* name, uint size)
 {
   GLint att_tmp = glGetAttribLocation(s->program, name);
   if (att_tmp == -1) {
@@ -81,6 +81,22 @@ cgl_shader_attribute_get(CglShader *s, const char* name, uint size)
     return cgl_att;
   }
 }
+
+CglShaderUniform*
+cgl_shader_uniform_new(CglShader *s, const char* name)
+{
+  GLint uni_tmp = glGetUniformLocation(s->program, name);
+  if (uni_tmp == -1) {
+    ERR("Error in getting uniform '%s' at line %d", name, __LINE__);
+    return NULL;
+  }
+  else{
+    CglShaderUniform* cgl_uni = calloc(1, sizeof *cgl_uni);
+    cgl_uni->location = uni_tmp;
+    return cgl_uni;
+  }
+}
+
 
 void
 cgl_shader_use(CglShader* s)
@@ -109,6 +125,19 @@ cgl_draw()
 {
   //TODO
   glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+
+void
+cgl_shader_uniform_float_set(CglShaderUniform* uni, float f)
+{
+  glUniform1f(uni->location, f);
+}
+
+void
+cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w)
+{
+  glUniform4f(uni->location, x, y , z, w);
 }
 
 
