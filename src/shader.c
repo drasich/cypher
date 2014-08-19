@@ -3,7 +3,7 @@
 #define ERR(str,...) printf("ERROR : %s\n", str, ## __VA_ARGS__)
 
 CglShader*
-cgl_shader_init_string(const char* vert, const char* frag, const char* att)
+cgl_shader_init_string(const char* vert, const char* frag)
 {
   CglShader* s = calloc(1, sizeof *s);
   //TODO factorize this by creating a function that get the shader id
@@ -60,13 +60,26 @@ cgl_shader_init_string(const char* vert, const char* frag, const char* att)
     free(message);
   }
 
-  GLint att_tmp = glGetAttribLocation(s->program, att);
-  s->att_location = att_tmp;
-  if (att_tmp == -1) {
-    ERR("Error in getting attribute '%s' at line %d", att, __LINE__);
-  }
-
   return s;
+}
+
+CglShaderAttribute*
+cgl_shader_attribute_get(CglShader *s, const char* name, uint size)
+{
+  GLint att_tmp = glGetAttribLocation(s->program, name);
+  if (att_tmp == -1) {
+    ERR("Error in getting attribute '%s' at line %d", name, __LINE__);
+    return NULL;
+  }
+  else{
+    CglShaderAttribute* cgl_att = calloc(1, sizeof *cgl_att);
+    cgl_att->location = att_tmp;
+    //TODO
+    cgl_att->size = size;
+    cgl_att->type = GL_FLOAT;
+
+    return cgl_att;
+  }
 }
 
 void
@@ -76,39 +89,26 @@ cgl_shader_use(CglShader* s)
 }
 
 void
-cgl_shader_attribute_send(CglShader* s, CglBuffer* buf)
+cgl_shader_attribute_send(CglShaderAttribute* att,  CglBuffer* buf)
 {
   glBindBuffer(buf->target, buf->id);
-  glEnableVertexAttribArray(s->att_location);
+  glEnableVertexAttribArray(att->location);
 
   glVertexAttribPointer(
-        s->att_location,
-        2,
-        GL_FLOAT, //att->type,
+        att->location,
+        att->size,
+        att->type,
         GL_FALSE,
-        0,//buf->stride,
+        0,//buf->stride, //TODO
         0);
 
-  glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void
-cgl_shader_draw(CglShader* s, CglBuffer* buf)
+cgl_draw()
 {
-  glBindBuffer(buf->target, buf->id);
-  glEnableVertexAttribArray(s->att_location);
-
-  glVertexAttribPointer(
-        s->att_location,
-        2,
-        GL_FLOAT, //att->type,
-        GL_FALSE,
-        0,//buf->stride,
-        0);
-
+  //TODO
   glDrawArrays(GL_TRIANGLES, 0, 3);
 }
-
-
 
 
