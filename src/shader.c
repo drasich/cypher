@@ -140,4 +140,10 @@ cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, fl
   glUniform4f(uni->location, x, y , z, w);
 }
 
+void
+cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix)
+{
+  glUniformMatrix4fv(uni->location, 1, GL_FALSE, matrix);
+}
+
 

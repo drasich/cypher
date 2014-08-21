@@ -56,5 +56,6 @@ void cgl_draw();
 
 void cgl_shader_uniform_float_set(CglShaderUniform* uni, float f);
 void cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w);
+void cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix);
 
 #endif
