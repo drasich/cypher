@@ -52,7 +52,7 @@ CglShaderAttribute* cgl_shader_attribute_new(CglShader *s, const char* name, uin
 CglShaderUniform* cgl_shader_uniform_new(CglShader *s, const char* name);
 
 void cgl_shader_attribute_send(CglShaderAttribute* att,  CglBuffer* buf);
-void cgl_draw();
+void cgl_draw(uint vertex_count);
 
 void cgl_shader_uniform_float_set(CglShaderUniform* uni, float f);
 void cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w);

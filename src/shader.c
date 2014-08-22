@@ -121,10 +121,10 @@ cgl_shader_attribute_send(CglShaderAttribute* att,  CglBuffer* buf)
 }
 
 void
-cgl_draw()
+cgl_draw(uint vertex_count)
 {
   //TODO
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawArrays(GL_TRIANGLES, 0, vertex_count );
 }
 
 
