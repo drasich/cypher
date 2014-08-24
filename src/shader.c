@@ -125,7 +125,23 @@ cgl_draw(uint vertex_count)
 {
   //TODO
   glDrawArrays(GL_TRIANGLES, 0, vertex_count );
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
+void
+cgl_draw_faces(const CglBuffer* buffer, uint index_count)
+{
+  //TODO
+  glBindBuffer(buffer->target, buffer->id);
+  glDrawElements(
+        GL_TRIANGLES, 
+        index_count,
+        GL_UNSIGNED_INT,
+        0);
+
+  glBindBuffer(buffer->target, 0);
+}
+
 
 
 void
