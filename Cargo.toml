@@ -1,0 +1,8 @@
+[package]
+
+name = "cypher"
+version = "0.1.0"
+authors = [ "chris@indefini.org" ]
+build = ["waf configure", "waf"]
+
+
