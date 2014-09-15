@@ -3,7 +3,6 @@
 CglTexture*
 cgl_texture_init(const void* data, int internal_format, int width, int height)
 {
-
   CglTexture* t = calloc(1, sizeof *t);
 
   GLuint idtex;

@@ -2,6 +2,7 @@
 #define __shader__
 #include "gl.h"
 #include "buffer.h"
+#include "texture.h"
 
 typedef struct _CglShaderAttribute CglShaderAttribute;
 
@@ -57,6 +58,7 @@ void cgl_draw(uint vertex_count);
 void cgl_shader_uniform_float_set(CglShaderUniform* uni, float f);
 void cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w);
 void cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix);
+void cgl_shader_uniform_texture_set(CglShaderUniform* uni, const CglTexture* texture);
 
 void cgl_draw_faces(const CglBuffer* buffer, uint index_count);
 void cgl_draw_end();
