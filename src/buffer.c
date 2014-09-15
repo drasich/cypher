@@ -1,7 +1,8 @@
 #include "buffer.h"
+#include "log.h"
 
 CglBuffer*
-cgl_buffer_init(const void* vertex, uint count)
+cgl_buffer_init(const void* data, uint count)
 {
   CglBuffer* b = calloc(1, sizeof *b);
   b->target = GL_ARRAY_BUFFER;
@@ -12,7 +13,7 @@ cgl_buffer_init(const void* vertex, uint count)
         b->target,
         //b->size,
         count * sizeof(GLfloat), //TODO size of f32
-        vertex,
+        data,
         GL_DYNAMIC_DRAW);
 
   return b;

@@ -59,5 +59,6 @@ void cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float 
 void cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix);
 
 void cgl_draw_faces(const CglBuffer* buffer, uint index_count);
+void cgl_draw_end();
 
 #endif

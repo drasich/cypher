@@ -1,6 +1,5 @@
 #include "shader.h"
-
-#define ERR(str,...) printf("ERROR : %s\n", str, ## __VA_ARGS__)
+#include "log.h"
 
 CglShader*
 cgl_shader_init_string(const char* vert, const char* frag)
@@ -24,11 +23,11 @@ cgl_shader_init_string(const char* vert, const char* frag)
 
   glGetShaderiv(s->vert_shader, GL_COMPILE_STATUS, &status);
   if (status == GL_FALSE) {
-    ERR("There was an error compiling the vertex shader");
+    ERR("There was an error compiling the vertex shader.");
     glGetShaderiv(s->vert_shader, GL_INFO_LOG_LENGTH, &info_length);
     message = malloc(info_length);
     glGetShaderInfoLog(s->vert_shader, info_length, 0, message);
-    ERR("%s",message);
+    ERR("Message was : '%s'",message);
     free(message);
   }
 
@@ -37,11 +36,11 @@ cgl_shader_init_string(const char* vert, const char* frag)
 
   glGetShaderiv(s->frag_shader, GL_COMPILE_STATUS, &status);
   if (status == GL_FALSE) {
-    ERR("There was an error compiling the fragment shader");
+    ERR("There was an error compiling the fragment shader.");
     glGetShaderiv(s->frag_shader, GL_INFO_LOG_LENGTH, &info_length);
     message = malloc(info_length);
     glGetShaderInfoLog(s->frag_shader, info_length, 0, message);
-    ERR("message : %s", message);
+    ERR("Message was : '%s'",message);
     free(message);
   }
 
@@ -140,6 +139,13 @@ cgl_draw_faces(const CglBuffer* buffer, uint index_count)
         0);
 
   glBindBuffer(buffer->target, 0);
+}
+
+void
+cgl_draw_end()
+{
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 

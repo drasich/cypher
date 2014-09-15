@@ -8,5 +8,6 @@ build = ["waf configure", "waf"]
 [lib]
 
 name = "cypher"
+path = "src/lib.rs"
 
 
