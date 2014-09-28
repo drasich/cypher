@@ -169,9 +169,8 @@ cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix)
 }
 
 void
-cgl_shader_uniform_texture_set(CglShaderUniform* uni, const CglTexture* texture)
+cgl_shader_uniform_texture_set(CglShaderUniform* uni, const CglTexture* texture, uint i)
 {
-  int i = 0;
   glUniform1i(uni->location, i);
   glActiveTexture(GL_TEXTURE0 + i);
   glBindTexture(GL_TEXTURE_2D, texture->id);
