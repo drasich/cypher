@@ -40,4 +40,7 @@ void cypher_resize(int w, int h)
   // GL Viewport stuff. you can avoid doing this if viewport is all the
   // same as last frame if you want
   glViewport(0, 0, w, h);
+  if (!resize_callback_call(w,h))  {
+    printf("problem with resize callback \n");
+  }
 }
