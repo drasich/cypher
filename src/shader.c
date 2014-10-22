@@ -128,6 +128,16 @@ cgl_draw(uint vertex_count)
 }
 
 void
+cgl_draw_lines(uint vertex_count)
+{
+  //TODO
+  //printf("lines %d\n", vertex_count);
+  glDrawArrays(GL_LINES, 0, vertex_count );
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+
+void
 cgl_draw_faces(const CglBuffer* buffer, uint index_count)
 {
   //TODO

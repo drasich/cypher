@@ -61,6 +61,7 @@ void cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix);
 void cgl_shader_uniform_texture_set(CglShaderUniform* uni, const CglTexture* texture, uint i);
 
 void cgl_draw_faces(const CglBuffer* buffer, uint index_count);
+void cgl_draw_lines(uint vertex_count);
 void cgl_draw_end();
 
 #endif
