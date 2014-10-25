@@ -14,6 +14,7 @@ cgl_create_fbo()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+  printf("create depth id %d \n", f->texture_depth_stencil_id);
   //TODO texture resolution
   int width = 1200;
   int height = 400;
@@ -48,6 +49,8 @@ cgl_create_fbo()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+  printf("create color id %d \n", f->texture_color);
 
   glTexImage2D(
         GL_TEXTURE_2D,
@@ -120,7 +123,11 @@ cgl_fbo_use(CglFbo* f)
 {
   glBindTexture(GL_TEXTURE_2D, 0);
   glBindFramebuffer(GL_FRAMEBUFFER, f->fbo);
-
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT) ;
+  glEnable(GL_STENCIL_TEST);
+  glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+  glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+  //TODO clear..
 }
 
 void
@@ -160,6 +167,7 @@ cgl_fbo_resize(CglFbo* f, int w, int h)
         NULL);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+  printf("resize color id %d,  w %d, h %d \n", f->texture_color, w, h);
 
   glBindRenderbuffer(GL_RENDERBUFFER, f->rb);
   glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, w, h);
