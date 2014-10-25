@@ -4,6 +4,7 @@
 CglFbo* 
 cgl_create_fbo()
 {
+  printf("start creating fbo\n");
   CglFbo* f = calloc(1, sizeof *f);
 
   glGenTextures(1, &f->texture_depth_stencil_id);
@@ -104,10 +105,10 @@ cgl_create_fbo()
   GLenum e = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 
   if (e == GL_FRAMEBUFFER_COMPLETE) {
-    printf("---->>>>>buffer complete");
+    printf("---->>>>>buffer complete\n");
   }
   else
-    printf("---->>>>>buffer NOOOOOOOOOOOOOOOT complete");
+    printf("---->>>>>buffer NOOOOOOOOOOOOOOOT complete\n");
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
