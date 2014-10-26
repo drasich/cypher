@@ -167,6 +167,18 @@ cgl_shader_uniform_float_set(CglShaderUniform* uni, float f)
 }
 
 void
+cgl_shader_uniform_vec2_set(CglShaderUniform* uni, float x, float y)
+{
+  glUniform2f(uni->location, x, y);
+}
+
+void
+cgl_shader_uniform_vec3_set(CglShaderUniform* uni, float x, float y, float z)
+{
+  glUniform3f(uni->location, x, y , z);
+}
+
+void
 cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w)
 {
   glUniform4f(uni->location, x, y , z, w);
@@ -191,9 +203,9 @@ cgl_shader_uniform_fbo_set(CglShaderUniform* uni, const CglFbo* fbo, uint i)
 {
   glUniform1i(uni->location, i);
   glActiveTexture(GL_TEXTURE0 + i);
-  //glBindTexture(GL_TEXTURE_2D, fbo->texture_depth_stencil_id);
+  glBindTexture(GL_TEXTURE_2D, fbo->texture_depth_stencil_id);
   //TODO choose color and depth
-  glBindTexture(GL_TEXTURE_2D, fbo->texture_color);
+  //glBindTexture(GL_TEXTURE_2D, fbo->texture_color);
   //printf("uniform fbo send  id %d, index %d \n", fbo->texture_depth_stencil_id, i);
 }
 
