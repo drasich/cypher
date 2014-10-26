@@ -4,7 +4,6 @@
 CglFbo* 
 cgl_create_fbo()
 {
-  printf("start creating fbo\n");
   CglFbo* f = calloc(1, sizeof *f);
 
   glGenTextures(1, &f->texture_depth_stencil_id);
@@ -14,7 +13,6 @@ cgl_create_fbo()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-  printf("create depth id %d \n", f->texture_depth_stencil_id);
   //TODO texture resolution
   int width = 1200;
   int height = 400;
@@ -49,8 +47,6 @@ cgl_create_fbo()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-  printf("create color id %d \n", f->texture_color);
 
   glTexImage2D(
         GL_TEXTURE_2D,
@@ -167,7 +163,6 @@ cgl_fbo_resize(CglFbo* f, int w, int h)
         NULL);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-  printf("resize color id %d,  w %d, h %d \n", f->texture_color, w, h);
 
   glBindRenderbuffer(GL_RENDERBUFFER, f->rb);
   glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, w, h);
