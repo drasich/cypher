@@ -9,7 +9,7 @@ typedef struct _CglShaderAttribute CglShaderAttribute;
 
 struct _CglShaderAttribute
 {
-  GLuint location;
+  GLint location;
   GLint size;
   GLenum type;
 };
@@ -17,7 +17,7 @@ struct _CglShaderAttribute
 
 typedef struct _CglShaderUniform CglShaderUniform;
 struct _CglShaderUniform{
-  GLuint location;
+  GLint location;
   //UniformType type;
 };
 
