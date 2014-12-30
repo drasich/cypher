@@ -37,3 +37,15 @@ cgl_buffer_index_init(const void* data, uint count)
   return b;
 }
 
+void
+cgl_buffer_update(CglBuffer* b, const void* data, uint count)
+{
+  glBindBuffer(b->target, b->id);
+  glBufferSubData(
+        b->target,
+        0,
+        //b->size,
+        count * sizeof(GLfloat), //TODO size of f32
+        data);
+}
+
