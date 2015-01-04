@@ -158,7 +158,11 @@ cgl_draw_end()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-
+void
+cgl_shader_uniform_int_set(CglShaderUniform* uni, int i)
+{
+  glUniform1i(uni->location, i);
+}
 
 void
 cgl_shader_uniform_float_set(CglShaderUniform* uni, float f)
