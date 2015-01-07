@@ -48,3 +48,8 @@ void cypher_resize(int w, int h)
     printf("problem with resize callback \n");
   }
 }
+
+void cgl_clear()
+{
+  glClear(GL_DEPTH_BUFFER_BIT);
+}
