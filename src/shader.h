@@ -63,7 +63,8 @@ void cgl_shader_uniform_vec3_set(CglShaderUniform* uni, float x, float y, float 
 void cgl_shader_uniform_vec4_set(CglShaderUniform* uni, float x, float y, float z, float w);
 void cgl_shader_uniform_mat4_set(CglShaderUniform* uni, const float* matrix);
 void cgl_shader_uniform_texture_set(CglShaderUniform* uni, const CglTexture* texture, uint i);
-void cgl_shader_uniform_fbo_set(CglShaderUniform* uni, const CglFbo* fbo, uint i);
+void cgl_shader_uniform_fbo_depth_set(CglShaderUniform* uni, const CglFbo* fbo, uint i);
+void cgl_shader_uniform_fbo_color_set(CglShaderUniform* uni, const CglFbo* fbo, uint i);
 
 void cgl_draw_faces(const CglBuffer* buffer, uint index_count);
 void cgl_draw_lines(uint vertex_count);
