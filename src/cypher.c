@@ -1,5 +1,4 @@
 #include "cypher.h"
-#include "drawable.h"
 #include "gl.h"
 
 void cypher_init(rust_callback cb_init, void* data)
@@ -9,12 +8,6 @@ void cypher_init(rust_callback cb_init, void* data)
   glDepthFunc(GL_LEQUAL);
   glClearDepthf(1.0f);
   glClearStencil(0);
-
-  /*
-  if (!cb_call_init())  {
-    printf("problem with init callback \n");
-  }
-  */
 
   if (cb_init && data) {
     cb_init(data);
@@ -31,18 +24,8 @@ void cypher_draw(rust_callback cb_draw, void* data, int w, int h)
   glEnable(GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  /*
-  if (!cb_call_draw())  {
-    printf("problem with draw callback \n");
-  }
-  */
-
   if (cb_draw && data) {
     cb_draw(data);
-    printf("draw callback \n");
-  }
-  else {
-    printf("problem with draw callback \n");
   }
 
   glFinish();
@@ -59,11 +42,6 @@ void cypher_resize(resize_callback cb_resize, void* data, int w, int h)
   // GL Viewport stuff. you can avoid doing this if viewport is all the
   // same as last frame if you want
   glViewport(0, 0, w, h);
-  /*
-  if (!resize_callback_call(w,h))  {
-    printf("problem with resize callback \n");
-  }
-  */
 
   if (cb_resize && data) {
     cb_resize(data, w, h);
