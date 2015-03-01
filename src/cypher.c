@@ -39,6 +39,10 @@ void cypher_draw(rust_callback cb_draw, void* data, int w, int h)
 
   if (cb_draw && data) {
     cb_draw(data);
+    printf("draw callback \n");
+  }
+  else {
+    printf("problem with draw callback \n");
   }
 
   glFinish();
@@ -50,13 +54,19 @@ void cypher_del()
 
 }
 
-void cypher_resize(int w, int h)
+void cypher_resize(resize_callback cb_resize, void* data, int w, int h)
 {
   // GL Viewport stuff. you can avoid doing this if viewport is all the
   // same as last frame if you want
   glViewport(0, 0, w, h);
+  /*
   if (!resize_callback_call(w,h))  {
     printf("problem with resize callback \n");
+  }
+  */
+
+  if (cb_resize && data) {
+    cb_resize(data, w, h);
   }
 }
 
