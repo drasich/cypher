@@ -2,7 +2,7 @@
 #include "drawable.h"
 #include "gl.h"
 
-void cypher_init()
+void cypher_init(rust_callback cb_init, void* data)
 {
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_STENCIL_TEST);
@@ -10,13 +10,18 @@ void cypher_init()
   glClearDepthf(1.0f);
   glClearStencil(0);
 
+  /*
   if (!cb_call_init())  {
     printf("problem with init callback \n");
   }
+  */
 
+  if (cb_init && data) {
+    cb_init(data);
+  }
 }
 
-void cypher_draw(int w, int h)
+void cypher_draw(rust_callback cb_draw, void* data, int w, int h)
 {
   glViewport(0, 0, w, h);
 
@@ -26,8 +31,14 @@ void cypher_draw(int w, int h)
   glEnable(GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+  /*
   if (!cb_call_draw())  {
     printf("problem with draw callback \n");
+  }
+  */
+
+  if (cb_draw && data) {
+    cb_draw(data);
   }
 
   glFinish();

@@ -1,9 +1,7 @@
 #ifndef __drawable__
 #define __drawable__
 #include "stdbool.h"
-
-typedef void (*rust_callback)(void* data);
-typedef void (*resize_callback)(void* data, int w, int h);
+#include "cypher.h"
 
 void draw_callback_set(
       rust_callback init,
