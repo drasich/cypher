@@ -42,5 +42,8 @@ fn build_cypher(include_paths: &[PathBuf]) {
         //.include("src")
         .define("EVAS_GL", None)
         .compile("libcypher.a");
+
+    //println!("cargo:rustc-link-search=native={}/lib", dst.display());
+    println!("cargo:include=src/");
 }
 
