@@ -44,6 +44,6 @@ fn build_cypher(include_paths: &[PathBuf]) {
         .compile("libcypher.a");
 
     //println!("cargo:rustc-link-search=native={}/lib", dst.display());
-    println!("cargo:include=src/");
+    println!("cargo:include={}/src", env::current_dir().unwrap().display());
 }
 
