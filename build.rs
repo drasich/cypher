@@ -43,7 +43,9 @@ fn build_cypher(include_paths: &[PathBuf]) {
         .define("EVAS_GL", None)
         .compile("libcypher.a");
 
-    //println!("cargo:rustc-link-search=native={}/lib", dst.display());
+    let out_dir = env::var("OUT_DIR").unwrap();
+
+    println!("cargo:rustc-link-search=native={}", out_dir);
     println!("cargo:include={}/src", env::current_dir().unwrap().display());
 }
 
