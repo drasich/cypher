@@ -52,7 +52,7 @@ fn build_cypher(include_paths: &[PathBuf], with_evas : bool) {
     if with_evas {
         config.define("EVAS_GL", None);
     }
-    
+
     config.compile("libcypher.a");
 
     let out_dir = env::var("OUT_DIR").unwrap();

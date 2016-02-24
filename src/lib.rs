@@ -11,7 +11,3 @@ pub struct Keyboard;
 pub struct Evas_Object;
 
 
-extern "C" {
-}
-
-
