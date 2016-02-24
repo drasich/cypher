@@ -69,7 +69,11 @@ Evas_GL_API* gl;
 
 #else
 
+#include "stdlib.h"
 #include "GLES2/gl2.h"
+#include "GLES2/gl2ext.h"
+typedef unsigned int uint;
+
 
 #endif
 
