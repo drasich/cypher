@@ -8,11 +8,11 @@ cgl_shader_init_string(const char* vert, const char* frag)
   //TODO factorize this by creating a function that get the shader id
   s->vert_shader = glCreateShader(GL_VERTEX_SHADER);
   if (s->vert_shader == 0) 
-    ERR("there was en error creating the vertex shader.");
+    ERR("there was en error creating this vertex shader :\n%s\n", vert);
 
   s->frag_shader = glCreateShader(GL_FRAGMENT_SHADER);
   if (s->frag_shader == 0) 
-    ERR("there was en error creating the fragment shader.");
+    ERR("there was en error creating this fragment shader :\n%s\n", frag);
 
   glShaderSource(s->vert_shader, 1, &vert, 0);
   glCompileShader(s->vert_shader);
@@ -23,7 +23,7 @@ cgl_shader_init_string(const char* vert, const char* frag)
 
   glGetShaderiv(s->vert_shader, GL_COMPILE_STATUS, &status);
   if (status == GL_FALSE) {
-    ERR("There was an error compiling the vertex shader.");
+    ERR("There was an error compiling this vertex shader :\n%s\n", vert);
     glGetShaderiv(s->vert_shader, GL_INFO_LOG_LENGTH, &info_length);
     message = malloc(info_length);
     glGetShaderInfoLog(s->vert_shader, info_length, 0, message);
@@ -36,7 +36,7 @@ cgl_shader_init_string(const char* vert, const char* frag)
 
   glGetShaderiv(s->frag_shader, GL_COMPILE_STATUS, &status);
   if (status == GL_FALSE) {
-    ERR("There was an error compiling the fragment shader.");
+    ERR("There was an error compiling this fragment shader:\n%s\n", frag);
     glGetShaderiv(s->frag_shader, GL_INFO_LOG_LENGTH, &info_length);
     message = malloc(info_length);
     glGetShaderInfoLog(s->frag_shader, info_length, 0, message);

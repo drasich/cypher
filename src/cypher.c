@@ -14,11 +14,22 @@ void cypher_init(rust_callback cb_init, void* data)
   }
 }
 
+void cypher_init_simple()
+{
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_STENCIL_TEST);
+  glDepthFunc(GL_LEQUAL);
+  glClearDepthf(1.0f);
+  glClearStencil(0);
+}
+
+
 void cypher_draw(rust_callback cb_draw, void* data, int w, int h)
 {
   glViewport(0, 0, w, h);
 
-  glClearColor(0.2, 0.4, 0.2, 1.0);
+  //glClearColor(0.2, 0.4, 0.2, 1.0);
+  glClearColor(0.1, 0.1, 0.1, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glEnable(GL_BLEND);
@@ -29,7 +40,23 @@ void cypher_draw(rust_callback cb_draw, void* data, int w, int h)
   }
 
   glFinish();
+}
 
+void cypher_draw_start(int w, int h)
+{
+  glViewport(0, 0, w, h);
+
+  //glClearColor(0.2, 0.4, 0.2, 1.0);
+  glClearColor(0.1, 0.1, 0.1, 1.0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  glEnable(GL_BLEND);
+  glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void cypher_draw_end()
+{
+  glFinish();
 }
 
 void cypher_del()
