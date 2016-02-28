@@ -9,15 +9,16 @@ cgl_texture_init(const void* data, int internal_format, int width, int height)
   glGenTextures(1, &idtex);
   t->id = idtex;
 
-	glBindTexture(GL_TEXTURE_2D, idtex);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glBindTexture(GL_TEXTURE_2D, idtex);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
 
   glTexImage2D(
         GL_TEXTURE_2D,
         0,
-        //GL_RGBA, //4,
-        internal_format,
+        GL_RGBA, //4,
+        //internal_format,
         width,
         height,
         0,
