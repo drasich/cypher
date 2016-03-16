@@ -74,6 +74,7 @@ cgl_shader_attribute_new(CglShader *s, const char* name, uint size)
     CglShaderAttribute* cgl_att = calloc(1, sizeof *cgl_att);
     cgl_att->location = att_tmp;
     //TODO
+    printf("cypher: TODO attributes check type \n");
     cgl_att->size = size;
     cgl_att->type = GL_FLOAT;
 
@@ -219,6 +220,52 @@ cgl_shader_uniform_fbo_color_set(CglShaderUniform* uni, const CglFbo* fbo, uint 
   glBindTexture(GL_TEXTURE_2D, fbo->texture_color);
   //printf("uniform fbo send  id %d, index %d \n", fbo->texture_depth_stencil_id, i);
 }
+
+void 
+cgl_shader_uniforms_init(CglShader* s, uniform_set_cb cb, void* data)
+{
+  GLint num_uniforms;
+  glGetProgramiv(s->program, GL_ACTIVE_UNIFORMS, &num_uniforms);
+  GLchar uniform_name[256];
+  GLsizei length;
+  GLint size;
+  GLenum type;
+  for (int i = 0; i < num_uniforms; i++){
+    glGetActiveUniform(s->program, i, sizeof(uniform_name), &length, &size, &type, uniform_name);
+
+    CglShaderUniform* uni = cgl_shader_uniform_new(s, uniform_name);
+    cb(data, uniform_name, uni);
+   }
+}
+
+void 
+cgl_shader_attributes_init(CglShader* s, attribute_set_cb cb, void* data)
+{
+  GLint num_attributes;
+  glGetProgramiv(s->program, GL_ACTIVE_ATTRIBUTES, &num_attributes);
+  GLchar attribute_name[256];
+  GLsizei length;
+  GLint size;
+  GLenum type;
+  for (int i = 0; i < num_attributes; i++) {
+    glGetActiveAttrib(s->program, i, sizeof(attribute_name), &length, &size, &type, attribute_name);
+
+    printf("cypher: TODO attributes check size \n");
+    if (type == GL_FLOAT_VEC2){
+      size *= 2;
+    }
+    else if (type == GL_FLOAT_VEC3){
+      size *= 3;
+    }
+    else if (type == GL_FLOAT_VEC4){
+      size *= 4;
+    }
+
+    CglShaderAttribute* att = cgl_shader_attribute_new(s, attribute_name, size);
+    cb(data, attribute_name, att);
+   }
+}
+
 
 
 

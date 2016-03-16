@@ -45,9 +45,17 @@ struct _CglShader
   //GLuint att_location; //TODO remove
 };
 
-CglShader* shader_init_string(const char* vert, const char* frag);
+
+typedef void (uniform_set_cb)(void* data, const char* name, CglShaderUniform* uni);
+typedef void (attribute_set_cb)(void* data, const char* name, CglShaderAttribute* uni);
+
+void cgl_shader_uniforms_init(CglShader* s, uniform_set_cb cb, void* data);
+void cgl_shader_attributes_init(CglShader* s, attribute_set_cb cb, void* data);
+
+CglShader* cgl_shader_init_string(const char* vert, const char* frag);
 
 void shader_use(CglShader* s);
+
 
 
 CglShaderAttribute* cgl_shader_attribute_new(CglShader *s, const char* name, uint size);
